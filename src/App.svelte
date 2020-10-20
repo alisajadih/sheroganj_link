@@ -1,5 +1,4 @@
 <script>
-  import Button from "./Button.svelte";
+    import SuccessPage from "./success/Page.svelte"
 </script>
-
-<Button />
+<SuccessPage/>
