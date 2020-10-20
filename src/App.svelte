@@ -1,5 +1,5 @@
 <script>
-  let name = "world";
+  import Button from "./Button.svelte";
 </script>
 
-<h1>Hello {name}!</h1>
+<Button />
