@@ -9,11 +9,12 @@
         transform: translateY(-50%);
         background: white;
     }
+
     #bazaar {
         width: 100%;
         height: 100%;
     }
 </style>
 <div id='image-wrapper'>
-    <img id='bazaar' src='images/bazaar.png' alt='bazaar'>
+  <img id='bazaar' src='images/bazaar.png' alt='bazaar'>
 </div>

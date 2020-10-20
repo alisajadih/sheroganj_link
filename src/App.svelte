@@ -1,17 +1,15 @@
 <script>
-  import Form from "./Signup/Form.svelte";
-  import Header from "./Signup/Header.svelte";
-  import Signup from "./Signup/index.svelte";
+    import Page from "./success/Page.svelte";
 </script>
 
 <style>
-  .app {
-    width: 100%;
-    height: 100%;
-  }
+    .app {
+        width: 100%;
+        height: 100%;
+    }
 </style>
 
 <div class="app">
-  <Signup />
+  <Page/>
 </div>
 <!-- <Form /> -->
