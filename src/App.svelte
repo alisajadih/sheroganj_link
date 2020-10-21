@@ -16,7 +16,7 @@
 <Router {url}>
   <div class="app">
     <Route path="success" component={Page} />
-    <Route path="activate" component={Signup} />
+    <Route path="activate/:uid" component={Signup} />
   </div>
 </Router>
 
