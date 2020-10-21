@@ -1,8 +1,9 @@
 <script>
-  import Page from "./success/Page.svelte";
-  import Signup from "./Signup/index.svelte";
-  import { Router, Link, Route } from "svelte-routing";
-  export let url = "";
+    import Page from "./success/Page.svelte";
+    import Signup from "./Signup/index.svelte";
+    import {Route, Router} from "svelte-routing";
+
+    export let url = "";
 </script>
 
 <style>
