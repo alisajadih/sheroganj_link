@@ -1,5 +1,15 @@
 <script>
-
+  import { createEventDispatcher } from "svelte";
+  import CallSvg from "./CallSVG.svelte";
+  const dispatch = createEventDispatcher();
+  export let form;
+  export let errors;
+  export let loading;
+  const handleInput = (e) => {
+    form.phoneNumber = e.target.value;
+  };
+  $: hasError = errors && errors["phoneNumber"];
+  $: inputClasses = hasError ? "input-error" : "";
 </script>
 
 <style>
@@ -13,7 +23,7 @@
     left: 50%;
     transform: translate(-50%);
     text-align: center;
-    box-shadow: 0 50px 150px #1a00416d;
+    box-shadow: 0 50px 150px #00416d1a;
   }
   .icon-input {
     width: 100%;
@@ -26,6 +36,12 @@
     border-radius: 30px;
     text-align: right;
     background: #f8fafb;
+  }
+  .icon-error {
+    color: #ff0000 !important;
+  }
+  .input-error {
+    border: 1px solid #ff0000;
   }
   .icon-input-container {
     margin-top: 29px;
@@ -66,15 +82,30 @@
   .button-submit:focus {
     outline: none;
   }
+  .button-submit:disabled {
+    opacity: 0.8;
+  }
 </style>
 
-<div class="form-container mx-auto">
+<form
+  class="form-container mx-auto"
+  on:submit|preventDefault={() => dispatch('submit')}>
   <p class="form-header">برای دانلود اپلیکیشن شماره موبایلتان را وارد کنید</p>
   <div class="icon-input-container mx-auto">
-    <div class="icon-container">
-      <img src="/images/call.svg" alt="mobile icon" />
+    <div class={`icon-container`}>
+      <!-- <img src="/images/call.svg" alt="mobile icon" /> -->
+      <CallSvg color={hasError ? '#ff0000' : '#00416d'} />
     </div>
-    <input class="icon-input m-0" type="text" placeholder="شماره موبایل" />
+    <input
+      name="phoneNumber"
+      bind:value={form.phoneNumber}
+      on:input={handleInput}
+      class={`icon-input m-0 ${inputClasses}`}
+      type="text"
+      placeholder="شماره موبایل" />
   </div>
-  <button class="button-submit">ثبت شماره</button>
-</div>
+  <button
+    type="submit"
+    class="button-submit"
+    disabled={loading}>{loading ? 'در حال فعال‌سازی...' : 'ثبت شماره'}</button>
+</form>

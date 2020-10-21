@@ -17,6 +17,9 @@
     text-align: center;
     margin-top: 30px;
     color: #f9a44a;
+    font-weight: 700;
+    font-size: 21px;
+
   }
   .header-content {
     width: 315px;
@@ -25,6 +28,8 @@
     margin-top: 10px;
     color: #00416d;
     font-size: 14px;
+    font-weight: 500;
+    line-height: 30px;
   }
 </style>
 
