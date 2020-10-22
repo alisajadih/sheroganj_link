@@ -15,7 +15,7 @@
 </style>
 
 <div class="app">
-  <Router {url}>
+  <Router basepath='/app' {url}>
     <Route path="/activate/:uid"  component={Signup}/>
     <Route path="/success" component={Page} />
     <Route path="/pop-up" component={PopUp} />

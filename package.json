@@ -1,6 +1,8 @@
 {
   "name": "svelte-app",
   "version": "1.0.0",
+  "homepage": "http://171.22.24.129/app",
+  
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",

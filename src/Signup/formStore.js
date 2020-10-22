@@ -6,6 +6,8 @@ export let errors = writable(null);
 export let saving = writable(false);
 export let success = writable(null);
 
+const baseurl = "http://171.22.24.129";
+
 //requesting
 // "/invite" status = 404 , invalid uid | status = 400 , error haye farsi
 const wait = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -23,7 +25,7 @@ export const save = async (form, uid) => {
   saving.set(true);
   errors.set(null);
   try {
-    const res = await axios.post("http://171.22.24.129/api/invite/" + uid, {
+    const res = await axios.post(baseurl + "/api/invite/" + uid, {
       invited_mobile_number: form.phoneNumber,
     });
     errors.set(null);
@@ -77,11 +79,11 @@ export const save = async (form, uid) => {
 export const sendOTP = async (form) => {
   saving.set(true);
   axios
-    .post("http://171.22.24.129/api/verify_invite/" + form.phoneNumber, {
+    .post(baseurl + "/api/verify_invite/" + form.phoneNumber, {
       otp: form.otp,
     })
     .then((res) => {
-      window.location.href = "http://localhost:5000/success";
+      window.location.href = baseurl + "/app/success";
       saving.set(false);
       errors.set(null);
     })
@@ -97,9 +99,7 @@ export const sendRefreshOtp = async (form) => {
   console.log(form, "  send refresh opt");
   saving.set(true);
   try {
-    await axios.post(
-      "http://171.22.24.129/api/refresh_invite/" + form.phoneNumber
-    );
+    await axios.post(baseurl + "/api/refresh_invite/" + form.phoneNumber);
     errors.set(null);
     saving.set(false);
   } catch (err) {
