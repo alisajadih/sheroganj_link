@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70">
+    <defs>
+        <linearGradient id="awdck8edoa" x1="50%" x2="50%" y1="0%" y2="100%">
+            <stop offset="0%" stop-color="#005B99"/>
+            <stop offset="100%" stop-color="#00416D"/>
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g transform="translate(-275 -50) translate(30 50) translate(245)">
+                    <rect width="70" height="70" fill="url(#awdck8edoa)" rx="17.5"/>
+                    <text fill="#F9A44A" font-family="YekanBakh-Heavy, Yekan Bakh" font-size="19.833" font-weight="600">
+                        <tspan x="21.846" y="29.667">شعر </tspan> <tspan x="13" y="29.667">و</tspan>  <tspan x="13.169" y="53">گـــــنج</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

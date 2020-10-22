@@ -1,6 +1,7 @@
 <script>
+  import {slide} from 'svelte/transition'
   export let errorMessage;
-  $: errorMessage = errorMessage["otp"] || errorMessage["phoneNumber"];
+  $: errorMessage =errorMessage && (errorMessage["otp"] || errorMessage["phoneNumber"] ) || 'ارور';
 </script>
 
 <style>
@@ -12,6 +13,14 @@
     position: fixed;
     top: 0;
     background: white;
+    text-align: right;
+  }
+  @media (min-width: 992px) {
+    #ErrorWrapper {
+      width: 400px;
+      left: 50%;
+      transform: translate(-50%);
+    }
   }
   #ErrorImage {
     width: 33px;
@@ -21,6 +30,7 @@
     font-weight: 500;
     font-size: 15px;
     color: red;
+    margin:0;
     margin-right: 21px;
   }
   .flex {
@@ -52,9 +62,13 @@
   }
 </style>
 
-<div id="ErrorWrapper" class="flex flex-col items-center flex-no-wrap">
-  <div id="ErrorContent" class="flex flex-no-wrap flex-row">
+<div transition:slide  id="ErrorWrapper" class="flex align-items-center justify-content-center
+mx-auto">
+   
+  <div id="ErrorContent" class="flex  align-items-center">
     <img id="ErrorImage" src="/images/group.svg" alt="error" />
     <p id="ErrorMessage">{errorMessage}</p>
   </div>
 </div>
+
+<!-- flex-col items-center flex-no-wrap  -->

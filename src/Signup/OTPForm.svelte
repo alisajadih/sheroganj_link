@@ -2,6 +2,7 @@
   import { createEventDispatcher, onDestroy, onMount } from "svelte";
   import { navigate } from "svelte-routing";
   import { sendOTP, sendRefreshOtp } from "./formStore";
+  import { slide } from "svelte/transition";
   const dispatch = createEventDispatcher();
   export let form;
   export let errors;
@@ -16,7 +17,7 @@
     interval = setInterval(() => {
       if (!timer) clearInterval(interval);
       else timer = timer - 1;
-    }, 100);
+    }, 1000);
   });
   onDestroy(() => {
     clearInterval(interval);
@@ -29,14 +30,12 @@
       interval = setInterval(() => {
         if (!timer) clearInterval(interval);
         else timer = timer - 1;
-      }, 500);
+      }, 1000);
     } catch (err) {}
   };
-  const handleSendOtp = async () => {
-    try {
-      await sendOTP(form);
-      navigate("/success", { replace: true });
-    } catch (err) {}
+  const handleSendOtp =  () => {
+    sendOTP(form);
+    // navigate("/success", { replace: true });
   };
   $: hasError = errors && errors["otp"];
   $: inputClasses = hasError ? "input-error" : "";
@@ -54,6 +53,7 @@
     transform: translate(-50%);
     text-align: center;
     box-shadow: 0 50px 150px #00416d1a;
+    transition: all 0.3s;
   }
   .icon-input {
     width: 100%;
@@ -106,7 +106,6 @@
     top: 50%;
     transform: translate(0%, -50%);
   }
-
   .button-submit {
     width: 265px;
     height: 60px;
@@ -122,10 +121,13 @@
   .button-submit:disabled {
     opacity: 0.8;
   }
+  .slide-up {
+    height: 240px !important;
+  }
 </style>
 
 <form
-  class="form-container mx-auto"
+  class={`form-container mx-auto ${timer === 0 && 'slide-up'}`}
   on:submit|preventDefault={() => dispatch('submit')}>
   <p class="form-header">کد پیامک شده را وارد نمایید</p>
   <div class="icon-input-container mx-auto">
@@ -138,7 +140,11 @@
       disabled={timer === 0}
       placeholder="کد تأ‌یید" />
   </div>
-  <p class="form-header">{Math.floor(timer / 60)}:{timer % 60}</p>
+  {#if timer !== 0}
+    <p transition:slide class="form-header">
+      {Math.floor(timer / 60)}:{timer % 60}
+    </p>
+  {/if}
   {#if timer === 0}
     <button
       type="button"
@@ -150,6 +156,6 @@
       type="button"
       class="button-submit"
       on:click={handleSendOtp}
-      disabled={loading}>{loading ? 'در حال ارسال پیامک ...' : 'ارسال'}</button>
+      disabled={loading}>{loading ? 'در حال تاٰیید کد ...' : 'ارسال'}</button>
   {/if}
 </form>

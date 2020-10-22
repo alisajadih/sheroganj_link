@@ -5,6 +5,7 @@
   export let form;
   export let errors;
   export let loading;
+
   const handleInput = (e) => {
     form.phoneNumber = e.target.value;
   };
@@ -25,6 +26,16 @@
     text-align: center;
     box-shadow: 0 50px 150px #00416d1a;
   }
+  @media (min-width: 992px){
+    /* .form-container {
+      left: 35%;
+      top: 25%;
+      bottom: 0;
+      transform: translate(-50% , 50%);
+      position: static;
+    } */
+  }
+  
   .icon-input {
     width: 100%;
     height: 60px;
@@ -87,6 +98,7 @@
   }
 </style>
 
+
 <form
   class="form-container mx-auto"
   on:submit|preventDefault={() => dispatch('submit')}>
@@ -107,5 +119,5 @@
   <button
     type="submit"
     class="button-submit"
-    disabled={loading}>{loading ? 'در حال فعال‌سازی...' : 'ثبت شماره'}</button>
+    disabled={loading}>{loading ? 'در حال ارسال ...' : 'ثبت شماره'}</button>
 </form>
