@@ -20,15 +20,21 @@
 
 <div id="image-wrapper">
   <div class="mt-2">
-    <img id="bazaar" src="/images/bazaar.png" alt="bazaar" />
+    <a href=""> <img id="bazaar" src="/images/bazaar.png" alt="bazaar" /> </a>
   </div>
   <div class="mt-2">
-    <img id="bazaar" src="/images/rectangle-copy-4.png" alt="googleplay" />
+    <a href="">
+      <img id="bazaar" src="/images/rectangle-copy-4.png" alt="googleplay" />
+    </a>
   </div>
   <div class="mt-2">
-    <img id="bazaar" src="/images/rectangle-copy-5.jpg" alt="sibche" />
+    <a href="">
+      <img id="bazaar" src="/images/rectangle-copy-5.jpg" alt="sibche" />
+    </a>
   </div>
   <div class="mt-2">
-    <img id="bazaar" src="/images/sibapp-badge-black.png" alt="sibche" />
+    <a href="">
+      <img id="bazaar" src="/images/sibapp-badge-black.png" alt="sibche" />
+    </a>
   </div>
 </div>
