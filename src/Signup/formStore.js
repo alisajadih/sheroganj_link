@@ -83,7 +83,7 @@ export const sendOTP = async (form) => {
       otp: form.otp,
     })
     .then((res) => {
-      window.location.href = "http:/localhost:5000/app/success";
+      window.location.href = "http://171.22.24.129/app/success";
       saving.set(false);
       errors.set(null);
     })
