@@ -6,7 +6,7 @@ export let errors = writable(null);
 export let saving = writable(false);
 export let success = writable(null);
 
-const baseurl = "http://171.22.24.129";
+export const baseurl = "http://171.22.24.129";
 
 //requesting
 // "/invite" status = 404 , invalid uid | status = 400 , error haye farsi

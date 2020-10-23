@@ -4,8 +4,8 @@
 <style>
   .pop-bg {
     background: linear-gradient(#fdd081, #f9a44a);
+
     padding-top: 190px;
-    height: 100vh;
   }
   .image-wrapper {
     width: 180px;
@@ -55,21 +55,18 @@
   }
 </style>
 
-<div class="pop-bg ">
+<div class="h-100 pop-bg ">
   <div class="image-wrapper mx-auto">
-    <img width="180" src="/images/animation_500_kgkwosyz.gif" alt="box" />
+    <img width="180" src="/images/sad_2.png" alt="box" />
   </div>
-  <p class="pop-title mx-auto">ممنون از خرید شما</p>
-  <p class="pop-content mx-auto">
-    برای اطلاع از قرعه کشی ها لطفا پیج اینستاگرام شاعر را فالو کنید.
-  </p>
+  <p class="pop-title mx-auto">متاٰسفانه پرداخت ناموفق بود.</p>
 
   <div class="buttons-wrapper ">
     <a
       href="https://www.instagram.com/mrnazari_org/"
       class="button secondary mx-auto d-flex align-items-center justify-content-center">فالو</a>
     <a
-    href='sg://sheroganj'
+      href="sg://sheroganj"
       class="button primary margin-top mx-auto d-flex align-items-center justify-content-center">بعدا</a>
   </div>
 </div>

@@ -3,6 +3,8 @@
   import Signup from "./Signup/index.svelte";
   import PopUp from "./popup/index.svelte";
   import { Route, Router } from "svelte-routing";
+  import Callback from "./Callback.svelte";
+import FailPayment from "./fail/FailPayment.svelte";
 
   export let url = "";
 </script>
@@ -15,10 +17,12 @@
 </style>
 
 <div class="app">
-  <Router basepath='/app' {url}>
-    <Route path="/activate/:uid"  component={Signup}/>
+  <Router basepath="/app" {url}>
+    <Route path="/activate/:uid" component={Signup} />
     <Route path="/success" component={Page} />
-    <Route path="/pop-up" component={PopUp} />
+    <Route path="/successpayment" component={PopUp} />
+    <Route path="/failpayment" component={FailPayment} />
+    <Route path="/callback" component={Callback} />
   </Router>
 </div>
 <!-- <Form /> -->
