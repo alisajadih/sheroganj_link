@@ -78,14 +78,11 @@
   <div class="image-wrapper mx-auto">
     <img width="180" src="/images/sad_2.png" alt="box" />
   </div>
-  <p class="pop-title mx-auto">متاٰسفانه پرداخت ناموفق بود.</p>
+  <p class="pop-title mx-auto">متاسفانه پرداخت ناموفق بود.</p>
 
   <div class="buttons-wrapper ">
     <a
-      href="https://www.instagram.com/mrnazari_org/"
-      class="button secondary mx-auto d-flex align-items-center justify-content-center">فالو</a>
-    <a
       href="sg://sheroganj"
-      class="button primary margin-top mx-auto d-flex align-items-center justify-content-center">بعدا</a>
+      class="button secondary margin-top mx-auto d-flex align-items-center justify-content-center">بازگشت به برنامه</a>
   </div>
 </div>
