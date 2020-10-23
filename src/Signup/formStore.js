@@ -46,9 +46,13 @@ export const save = async (form, uid) => {
   }
 };
 export const sendOTP = async (form) => {
+  let phoneNumber = form.phoneNumber
+  if (form.phoneNumber.length === 11 && form.phoneNumber.startsWith("0")) {
+    phoneNumber = phoneNumber.slice(1);
+  }
   saving.set(true);
   axios
-    .post(baseurl + "/api/verify_invite/" + form.phoneNumber, {
+    .post(baseurl + "/api/verify_invite/" + phoneNumber, {
       otp: form.otp,
     })
     .then((res) => {
