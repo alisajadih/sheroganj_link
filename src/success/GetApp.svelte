@@ -20,20 +20,20 @@
 
 <div id="image-wrapper">
   <div class="mt-2">
-    <a href=""> <img id="bazaar" src="/images/bazaar.png" alt="bazaar" /> </a>
+    <a href="http://sheroganj.ir/download/sheroganj.apk"> <img id="bazaar" src="/images/bazaar.png" alt="bazaar" /> </a>
   </div>
   <div class="mt-2">
-    <a href="">
+    <a href="http://sheroganj.ir/download/sheroganj.apk">
       <img id="bazaar" src="/images/rectangle-copy-4.png" alt="googleplay" />
     </a>
   </div>
   <div class="mt-2">
-    <a href="">
+    <a href="http://sheroganj.ir/download/sheroganj.apk">
       <img id="bazaar" src="/images/rectangle-copy-5.jpg" alt="sibche" />
     </a>
   </div>
   <div class="mt-2">
-    <a href="">
+    <a href="http://sheroganj.ir/download/sheroganj.apk">
       <img id="bazaar" src="/images/sibapp-badge-black.png" alt="sibche" />
     </a>
   </div>
