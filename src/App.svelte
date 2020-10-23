@@ -12,7 +12,9 @@ import FailPayment from "./fail/FailPayment.svelte";
 <style>
   .app {
     width: 100%;
-    height: 100vh;
+    /* height: 100vh; */
+    min-height: 100% !important;
+    /* height: 100%; */
   }
 </style>
 
