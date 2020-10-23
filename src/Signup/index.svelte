@@ -2,8 +2,9 @@
   import Header from "./Header.svelte";
   import PhoneForm from "./PhoneForm.svelte";
   import OTPForm from "./OTPForm.svelte";
-  import { errors, save, saving, wait } from "./formStore";
+  import { baseurl, errors, save, saving, wait } from "./formStore";
   import ErrorAlert from "./ErrorAlert.svelte";
+  import axios from "axios";
 
   export let uid;
 
@@ -14,6 +15,10 @@
     otp: "",
   };
   const onSubmitPhoneNumber = async () => {
+    // const res = await axios.post(baseurl + "/api/invite/" + uid, {
+    //   invited_mobile_number: form.phoneNumber,
+    // });
+    // console.log(res , 'here');
     try {
       await save(form, uid);
       if (!$errors) {

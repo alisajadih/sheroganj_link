@@ -6,14 +6,16 @@ export let errors = writable(null);
 export let saving = writable(false);
 export let success = writable(null);
 
-export const baseurl = "http://171.22.24.129";
+export const baseurl = "https://sheroganj.ir";
 
 //requesting
 // "/invite" status = 404 , invalid uid | status = 400 , error haye farsi
 export const wait = (ms) => new Promise((res) => setTimeout(res, ms));
 export const save = async (form, uid) => {
-  console.log(form, uid);
-  if (
+  let phoneNumber = form.phoneNumber;
+  if (form.phoneNumber.length === 11 && form.phoneNumber.startsWith("0")) {
+    phoneNumber = phoneNumber.slice(1);
+  } else if (
     form.phoneNumber === "" ||
     isNaN(Number(form.phoneNumber)) ||
     form.phoneNumber.length !== 10 ||
@@ -29,7 +31,7 @@ export const save = async (form, uid) => {
   errors.set(null);
   try {
     const res = await axios.post(baseurl + "/api/invite/" + uid, {
-      invited_mobile_number: form.phoneNumber,
+      invited_mobile_number: phoneNumber,
     });
     errors.set(null);
     saving.set(false);
@@ -41,46 +43,6 @@ export const save = async (form, uid) => {
     saving.set(false);
     throw new Error();
   }
-
-  // axios
-  //   .post("http://171.22.24.129/api/invite/" + uid, {
-  //     invited_mobile_number: form.phoneNumber,
-  //   })
-  //   .then((res) => {
-  //     if (res.status >= 400) {
-  //       saving.set(false);
-  //       console.log(res);
-  //       errors.set(res.data.errors);
-  //       throw new Error();
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     saving.set(false);
-  //     console.log('here');
-  //     errors.set({ phoneNumber: "شماره موبایل وارد شده معتبر نمیباشد" });
-  //     throw new Error();
-  //   });
-  // errors.set(null);
-  // saving.set(false);
-  // //   errors.set(null);
-  // console.log("requesting ...", form);
-  // await wait(2000);
-  // console.log("recived ...");
-
-  // errors.set(null);
-  // saving.set(false);
-  //   const response = await api.post('product', form);
-
-  //   if (response.status >= 400) {
-  //     saving.set(false);
-  //     errors.set(response.data.errors);
-  //     return;
-  //   }
-
-  //   success.set(response.data.message);
-  //   order.set(response.data.data);
-
-  //   saving.set(false);
 };
 export const sendOTP = async (form) => {
   saving.set(true);
