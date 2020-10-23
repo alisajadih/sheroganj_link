@@ -9,6 +9,13 @@
   const handleInput = (e) => {
     form.phoneNumber = e.target.value;
   };
+  const handleFocus = (e) => {
+    hasFocus = true;
+  };
+  const handleBlue = () => {
+    hasFocus = false;
+  };
+  let hasFocus = false;
   $: hasError = errors && errors["phoneNumber"];
   $: inputClasses = hasError ? "input-error" : "";
 </script>
@@ -26,7 +33,7 @@
     text-align: center;
     box-shadow: 0 50px 150px #00416d1a;
   }
-  @media (min-width: 992px){
+  @media (min-width: 992px) {
     /* .form-container {
       left: 35%;
       top: 25%;
@@ -35,7 +42,7 @@
       position: static;
     } */
   }
-  
+
   .icon-input {
     width: 100%;
     height: 60px;
@@ -47,6 +54,10 @@
     border-radius: 30px;
     text-align: right;
     background: #f8fafb;
+  }
+  .icon-input:focus {
+    background-color: #fef8f0;
+    color: #00416d;
   }
   .icon-error {
     color: #ff0000 !important;
@@ -98,7 +109,6 @@
   }
 </style>
 
-
 <form
   class="form-container mx-auto"
   on:submit|preventDefault={() => dispatch('submit')}>
@@ -106,7 +116,8 @@
   <div class="icon-input-container mx-auto">
     <div class={`icon-container`}>
       <!-- <img src="/images/call.svg" alt="mobile icon" /> -->
-      <CallSvg color={hasError ? '#ff0000' : '#00416d'} />
+      <CallSvg
+        color={hasError ? '#ff0000' : hasFocus ? '#f7b46e' : '#00416d'} />
     </div>
     <input
       name="phoneNumber"
@@ -114,6 +125,8 @@
       on:input={handleInput}
       class={`icon-input m-0 ${inputClasses}`}
       type="text"
+      on:focus={handleFocus}
+      on:blur={handleBlue}
       placeholder="شماره موبایل" />
   </div>
   <button

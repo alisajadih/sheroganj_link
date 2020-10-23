@@ -10,7 +10,7 @@ const baseurl = "http://171.22.24.129";
 
 //requesting
 // "/invite" status = 404 , invalid uid | status = 400 , error haye farsi
-const wait = (ms) => new Promise((res) => setTimeout(res, ms));
+export const wait = (ms) => new Promise((res) => setTimeout(res, ms));
 export const save = async (form, uid) => {
   console.log(form, uid);
   if (
@@ -20,6 +20,9 @@ export const save = async (form, uid) => {
     !form.phoneNumber.startsWith("9")
   ) {
     errors.set({ phoneNumber: "شماره موبایل وارد شده صحیح نمیباشد." });
+    wait(2000).then(() => {
+      errors.set(null);
+    });
     return;
   }
   saving.set(true);
@@ -32,6 +35,9 @@ export const save = async (form, uid) => {
     saving.set(false);
   } catch (err) {
     errors.set({ phoneNumber: "شماره موبایل وارد شده صحیح نمیباشد" });
+    wait(2000).then(() => {
+      errors.set(null);
+    });
     saving.set(false);
     throw new Error();
   }
@@ -93,6 +99,9 @@ export const sendOTP = async (form) => {
       // console.log(err.data.non_field_errors, "here");
       saving.set(false);
       errors.set({ otp: "کد نامعتبر است" });
+      wait(2000).then(() => {
+        errors.set(null);
+      });
     });
 };
 export const sendRefreshOtp = async (form) => {
@@ -106,6 +115,9 @@ export const sendRefreshOtp = async (form) => {
     errors.set({
       otp:
         "کد تایید شما هنوز معتبر است و قبل از منقضی شدن آن انجام چنین عملیاتی وجود ندارد",
+    });
+    wait(2000).then(() => {
+      errors.set(null);
     });
     saving.set(false);
     throw new Erro();

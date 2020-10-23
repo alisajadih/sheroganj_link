@@ -74,6 +74,10 @@
   .icon-input:disabled {
     opacity: 0.8;
   }
+  .icon-input:focus {
+    background-color: #fef8f0;
+    color: #00416d;
+  }
   .icon-error {
     color: #ff0000 !important;
   }

@@ -2,7 +2,7 @@
   import Header from "./Header.svelte";
   import PhoneForm from "./PhoneForm.svelte";
   import OTPForm from "./OTPForm.svelte";
-  import { errors, save, saving } from "./formStore";
+  import { errors, save, saving, wait } from "./formStore";
   import ErrorAlert from "./ErrorAlert.svelte";
 
   export let uid;
