@@ -36,7 +36,8 @@ export const save = async (form, uid) => {
     errors.set(null);
     saving.set(false);
   } catch (err) {
-    errors.set({ phoneNumber: "شماره موبایل وارد شده صحیح نمیباشد" });
+    console.log(err.response);
+    errors.set({ phoneNumber: err.response.data.invited_mobile_number[0] });
     wait(2000).then(() => {
       errors.set(null);
     });
