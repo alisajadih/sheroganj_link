@@ -10,14 +10,17 @@
     /* min-height: 100% !important; */
   }
   .image-wrapper {
-    width: 180px;
-    height: 180px;
+    /* width: 90px; */
+    /* height: 90px; */
     position: absolute;
-    top : 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top : 25%;
     right: 50%;
     transform: translate(50%);
     /* top:10%; */
-    background-color: #fcd298;
+    background-color:transparent;
     border-radius: 100%;
     overflow: hidden;
   }
@@ -76,7 +79,7 @@
 
 <div class="pop-bg ">
   <div class="image-wrapper mx-auto">
-    <img width="180" src="/images/sad_2.png" alt="box" />
+    <img width="120" src="/images/close.png" alt="box" />
   </div>
   <p class="pop-title mx-auto">متاسفانه پرداخت ناموفق بود.</p>
 
