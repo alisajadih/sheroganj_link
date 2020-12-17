@@ -56,7 +56,7 @@ export const sendOTP = async (form) => {
       otp: form.otp,
     })
     .then((res) => {
-      window.location.href = "http://sheroganj.ir/app/success";
+      window.location.href = "https://sheroganj.ir/app/success";
       saving.set(false);
       errors.set(null);
     })
