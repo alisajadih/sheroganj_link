@@ -6,7 +6,7 @@ export let errors = writable(null);
 export let saving = writable(false);
 export let success = writable(null);
 
-export const baseurl = "http://api.sheroganj.ir";
+export const baseurl = "https://api.sheroganj.ir";
 
 //requesting
 // "/invite" status = 404 , invalid uid | status = 400 , error haye farsi
