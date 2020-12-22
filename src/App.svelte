@@ -19,7 +19,7 @@ import FailPayment from "./fail/FailPayment.svelte";
 </style>
 
 <div class="app">
-  <Router basepath="/app" {url}>
+  <Router {url}>
     <Route path="/activate/:uid" component={Signup} />
     <Route path="/success" component={Page} />
     <Route path="/successpayment" component={PopUp} />

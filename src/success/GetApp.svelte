@@ -1,4 +1,14 @@
 <script>
+  import axios from "axios";
+  import { onMount } from "svelte";
+  import { baseurl } from "../Signup/formStore";
+
+  let downloads = [];
+
+  onMount(async () => {
+    const res = await axios(baseurl + "/api/download_links/");
+    downloads = res.data;
+  });
 </script>
 
 <style>
@@ -19,22 +29,13 @@
 </style>
 
 <div id="image-wrapper">
-  <div class="mt-2">
-    <a href="http://sheroganj.ir/download/sheroganj.apk"> <img id="bazaar" src="/images/bazaar.png" alt="bazaar" /> </a>
-  </div>
-  <div class="mt-2">
-    <a href="http://sheroganj.ir/download/sheroganj.apk">
-      <img id="bazaar" src="/images/rectangle-copy-4.png" alt="googleplay" />
-    </a>
-  </div>
-  <div class="mt-2">
-    <a href="http://sheroganj.ir/download/sheroganj.apk">
-      <img id="bazaar" src="/images/rectangle-copy-5.jpg" alt="sibche" />
-    </a>
-  </div>
-  <div class="mt-2">
-    <a href="http://sheroganj.ir/download/sheroganj.apk">
-      <img id="bazaar" src="/images/sibapp-badge-black.png" alt="sibche" />
-    </a>
-  </div>
+  {#each downloads as dl}
+    {#if dl.is_active}
+      <div class="mt-2">
+        <a href={dl.image}>
+          <img id="download_image" src={dl.link} alt="download_image" />
+        </a>
+      </div>
+    {/if}
+  {/each}
 </div>

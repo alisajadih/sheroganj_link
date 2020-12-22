@@ -6,6 +6,7 @@ export let errors = writable(null);
 export let saving = writable(false);
 export let success = writable(null);
 
+export const baseFrontUrl = "https://app.sheroganj.ir";
 export const baseurl = "https://api.sheroganj.ir";
 
 //requesting
@@ -46,7 +47,7 @@ export const save = async (form, uid) => {
   }
 };
 export const sendOTP = async (form) => {
-  let phoneNumber = form.phoneNumber
+  let phoneNumber = form.phoneNumber;
   if (form.phoneNumber.length === 11 && form.phoneNumber.startsWith("0")) {
     phoneNumber = phoneNumber.slice(1);
   }
@@ -56,7 +57,7 @@ export const sendOTP = async (form) => {
       otp: form.otp,
     })
     .then((res) => {
-      window.location.href = "https://sheroganj.ir/app/success";
+      window.location.href = baseFrontUrl + "/success";
       saving.set(false);
       errors.set(null);
     })
