@@ -447,6 +447,11 @@ path-parse@^1.0.6:
   resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
   integrity sha512-GSmOT2EbHrINBf9SR7CDELwlJ8AENk3Qn7OikK4nFYAu3Ote2+JYNVvkpAEQm3/TLNEJFD/xZJjzyxg3KBWOzw==
 
+persianjs@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/persianjs/-/persianjs-0.4.0.tgz#52c53a111926f8426763ac937c5063756a7e74f2"
+  integrity sha512-mRxvgI3sqPJf+/h1fZuj86uCg0nHR3aVsFsx+Nror+ZeUFTIbgDjVa9zjDJETMUwrgSwo8D1l8FdLzYEayKH1A==
+
 picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.2.2.tgz#21f333e9b6b8eaff02468f5146ea406d345f4dad"

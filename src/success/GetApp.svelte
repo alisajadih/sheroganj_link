@@ -14,7 +14,7 @@
 <style>
   #image-wrapper {
     width: 315px;
-    height: 400px;
+    /* height: 400px; */
     border-radius: 20px;
     padding: 25px;
     box-shadow: 0 50px 150px #00416d1a;
@@ -32,8 +32,11 @@
   {#each downloads as dl}
     {#if dl.is_active}
       <div class="mt-2">
-        <a href={dl.image}>
-          <img id="download_image" src={dl.link} alt="download_image" />
+        <a href={dl.link}>
+          <img
+            id="bazaar"
+            src={dl.image}
+            alt="download_image" />
         </a>
       </div>
     {/if}
