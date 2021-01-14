@@ -51,13 +51,18 @@ export const save = async (form, uid) => {
     errors.set(null);
   } catch (err) {
     console.log(err.response);
-    errors.set({ phoneNumber: err.response.data.invited_mobile_number[0] });
-    wait(2000).then(() => {
-      errors.set(null);
-    });
-  }
-  finally{
-    saving.set(false)
+    const errorDate = err.response.data.invited_mobile_number;
+    if (errorDate[1] === "406") {
+      // redirect to success
+      window.location.href = baseFrontUrl + "/success";
+    } else {
+      errors.set({ phoneNumber: err.response.data.invited_mobile_number[0] });
+      wait(2000).then(() => {
+        errors.set(null);
+      });
+    }
+  } finally {
+    saving.set(false);
   }
 };
 export const sendOTP = async (form) => {
