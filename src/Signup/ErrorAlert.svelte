@@ -1,8 +1,27 @@
 <script>
-  import {slide} from 'svelte/transition'
+  import { slide } from "svelte/transition";
   export let errorMessage;
-  $: errorMessage =errorMessage && (errorMessage["otp"] || errorMessage["phoneNumber"] ) || 'ارور';
+  $: errorMessage =
+    typeof errorMessage === "string"
+      ? errorMessage
+      : (errorMessage &&
+          (errorMessage["otp"] || errorMessage["phoneNumber"])) ||
+        "ارور";
 </script>
+
+<div
+  transition:slide
+  id="ErrorWrapper"
+  class="flex align-items-center justify-content-center
+mx-auto"
+>
+  <div id="ErrorContent" class="flex  align-items-center">
+    <img id="ErrorImage" src="/images/group.svg" alt="error" />
+    <p id="ErrorMessage">{errorMessage}</p>
+  </div>
+</div>
+
+<!-- flex-col items-center flex-no-wrap  -->
 
 <style>
   #ErrorWrapper {
@@ -30,7 +49,7 @@
     font-weight: 500;
     font-size: 15px;
     color: red;
-    margin:0;
+    margin: 0;
     margin-right: 21px;
   }
   .flex {
@@ -61,14 +80,3 @@
     justify-content: space-around;
   }
 </style>
-
-<div transition:slide  id="ErrorWrapper" class="flex align-items-center justify-content-center
-mx-auto">
-   
-  <div id="ErrorContent" class="flex  align-items-center">
-    <img id="ErrorImage" src="/images/group.svg" alt="error" />
-    <p id="ErrorMessage">{errorMessage}</p>
-  </div>
-</div>
-
-<!-- flex-col items-center flex-no-wrap  -->

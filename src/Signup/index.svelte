@@ -5,6 +5,8 @@
   import { baseurl, errors, save, saving, wait } from "./formStore";
   import ErrorAlert from "./ErrorAlert.svelte";
   import axios from "axios";
+  import AmountForm from "../Amount/AmountForm.svelte";
+  // import Test from "./Test.svelte";
 
   export let uid;
 
@@ -15,12 +17,9 @@
     otp: "",
   };
   const onSubmitPhoneNumber = async () => {
-    // const res = await axios.post(baseurl + "/api/invite/" + uid, {
-    //   invited_mobile_number: form.phoneNumber,
-    // });
-    // console.log(res , 'here');
+    const tosenduid = uid === "new" ? null : uid;
     try {
-      await save(form, uid);
+      await save(form, tosenduid);
       if (!$errors) {
         phoneSubmitted = true;
       }
@@ -28,22 +27,6 @@
   };
   const onSubmitOtp = async () => {};
 </script>
-
-<style>
-  .signup-container {
-    position: relative;
-  }
-  /* @media (min-width: 992px) {
-    .signup-container {
-      height: 100%;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: static;
-    }
-  } */
-</style>
 
 <!-- <div id="main-wrapper" class='d-lg-flex justify-content-center align-items-center'> -->
 <div class="signup-container ">
@@ -56,13 +39,33 @@
       bind:form
       on:submit={onSubmitOtp}
       errors={$errors}
-      loading={$saving} />
+      loading={$saving}
+    />
   {:else}
     <PhoneForm
       bind:form
       on:submit={onSubmitPhoneNumber}
       errors={$errors}
-      loading={$saving} />
+      loading={$saving}
+    />
   {/if}
+  <!-- <AmountForm
+    bind:form
+    on:submit={onSubmitOtp}
+    errors={$errors}
+    loading={$saving}
+  /> -->
+  <!-- <Test
+    bind:form
+    on:submit={onSubmitOtp}
+    errors={$errors}
+    loading={$saving}
+  /> -->
 </div>
+
 <!-- </div> -->
+<style>
+  .signup-container {
+    position: relative;
+  }
+</style>

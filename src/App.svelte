@@ -4,24 +4,39 @@
   import PopUp from "./popup/index.svelte";
   import { Route, Router } from "svelte-routing";
   import Callback from "./Callback.svelte";
-import FailPayment from "./fail/FailPayment.svelte";
+  import FailPayment from "./fail/FailPayment.svelte";
+  import { onMount } from "svelte";
+  import { navigate } from "svelte-routing";
+  import { axiosInstance } from "./axiosInstance";
+  import { baseFrontUrl } from "./Signup/formStore";
+  import AmountForm from "./Amount/AmountForm.svelte";
+
+  onMount(async () => {
+    try {
+      const res = await axiosInstance.get("/buy/");
+      console.log(res.data);
+      if (res?.data?.is_bought) {
+        // window.location.href = `${baseFrontUrl}/success`;
+        navigate("/success");
+      } else {
+        navigate("/amount");
+        // window.location.href = `${baseFrontUrl}/amount`;
+      }
+    } catch (err) {
+      if (err?.response?.status === 401) {
+        navigate("/activate/new");
+      }
+    }
+  });
 
   export let url = "";
 </script>
-
-<style>
-  .app {
-    width: 100%;
-    /* height: 100vh; */
-    min-height: 100% !important;
-    /* height: 100%; */
-  }
-</style>
 
 <div class="app">
   <Router {url}>
     <Route path="/activate/:uid" component={Signup} />
     <Route path="/success" component={Page} />
+    <Route path="/amount" component={AmountForm} />
     <Route path="/successpayment" component={PopUp} />
     <Route path="/failpayment" component={FailPayment} />
     <Route path="/callback" component={Callback} />
@@ -37,3 +52,11 @@ import FailPayment from "./fail/FailPayment.svelte";
     second form : timer should be disapear and button content should be "ارسال مجدد کد تایید"
     page bad az kharid; 
      -->
+<style>
+  .app {
+    width: 100%;
+    /* height: 100vh; */
+    min-height: 100% !important;
+    /* height: 100%; */
+  }
+</style>

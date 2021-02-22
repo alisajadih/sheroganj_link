@@ -68,7 +68,7 @@
     <div id="logo" class="flex flex-col items-center justify-center">
       <img width="100" src="/images/group_25.png" alt="logo" />
     </div>
-    <p id="success-message">شماره موبایل شما با موفقیت ثبت شد.</p>
+    <p id="success-message">دانلود اپلیکیشن</p>
   </div>
   <GetApp />
 </div>

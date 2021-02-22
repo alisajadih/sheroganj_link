@@ -1,15 +1,18 @@
-import axios from "axios";
 import { writable } from "svelte/store";
 import { navigate } from "svelte-routing";
+import { axiosInstance } from "../axiosInstance";
+import { createTokenObj, LSService } from "../localStorage";
 
 export let errors = writable(null);
 export let saving = writable(false);
 export let success = writable(null);
 
-export const baseFrontUrl = "https://app.sheroganj.ir";
+export const baseFrontUrl =
+  //  "https://app.sheroganj.ir"
+  "http://localhost:5000";
 export const baseurl = "https://api.sheroganj.ir";
 
-function convertNumbers2English(string) {
+export function convertNumbers2English(string) {
   return string
     .replace(/[\u0660-\u0669]/g, function (c) {
       return c.charCodeAt(0) - 0x0660;
@@ -45,9 +48,13 @@ export const save = async (form, uid) => {
   errors.set(null);
   try {
     saving.set(true);
-    const res = await axios.post(baseurl + "/api/invite/" + uid, {
-      invited_mobile_number: convertNumbers2English(phoneNumber),
-    });
+    const res = await axiosInstance.post(
+      "/invite/",
+      {
+        mobile_number: convertNumbers2English(phoneNumber),
+      },
+      { params: { invite_code: uid } }
+    );
     errors.set(null);
   } catch (err) {
     console.log(err.response);
@@ -74,15 +81,22 @@ export const sendOTP = async (form) => {
     phoneNumber = phoneNumber.slice(1);
   }
   saving.set(true);
-  axios
-    .post(
-      baseurl + "/api/verify_invite/" + convertNumbers2English(phoneNumber),
-      {
-        otp: convertNumbers2English(form.otp),
-      }
-    )
+  axiosInstance
+    .post("/invite/confirm/", {
+      mobile_number: convertNumbers2English(phoneNumber),
+      password: convertNumbers2English(form.otp),
+    })
     .then((res) => {
-      window.location.href = baseFrontUrl + "/success";
+      // window.location.href = baseFrontUrl + "/success";
+      window.location.href = baseFrontUrl + "/amount";
+      const tokenObj = createTokenObj(res?.data?.access, res?.data?.refresh);
+      LSService.setToken(tokenObj);
+      if (res?.data?.user?.is_bought) {
+        window.location.href = baseFrontUrl + "/success";
+      } else {
+        console.log('here');
+        window.location.href = baseFrontUrl + "/amount";
+      }
       saving.set(false);
       errors.set(null);
     })
@@ -101,7 +115,7 @@ export const sendRefreshOtp = async (form) => {
   console.log(form, "send refresh opt");
   saving.set(true);
   try {
-    await axios.post(
+    await axiosInstance.post(
       baseurl +
         "/api/refresh_invite/" +
         convertNumbers2English(form.phoneNumber)
