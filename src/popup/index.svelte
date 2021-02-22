@@ -1,6 +1,42 @@
 <script>
+  import { onMount } from "svelte";
+  import { axiosInstance } from "../axiosInstance";
+
+  let downloads = [];
+  onMount(async () => {
+    const res = await axiosInstance("/download_links/");
+    console.log(res.data);
+    downloads = res.data;
+  });
+  console.log(downloads);
 </script>
 
+<div class="pop-bg">
+  <div class="image-wrapper mx-auto">
+    <img width="180" src="/images/animation_500_kgkwosyz.gif" alt="box" />
+  </div>
+  <p class="pop-title mx-auto">ممنون از خرید شما</p>
+  <p class="pop-content mx-auto">
+    برای اطلاع از قرعه کشی ها لطفا پیج اینستاگرام شاعر را فالو کنید.
+  </p>
+
+  <div class="buttons-wrapper ">
+    <a
+      href={!!downloads.length && downloads[0].is_active && downloads[0].link}
+      class="button secondary mx-auto d-flex align-items-center justify-content-center"
+      >دانلود برنامه</a
+    >
+    <a
+      href="https://www.instagram.com/mrnazari_org/"
+      class="button primary margin-top mx-auto d-flex align-items-center justify-content-center"
+      >فالو</a
+    >
+  </div>
+</div>
+
+<!-- href="sg://sheroganj" -->
+
+<!-- href="https://www.instagram.com/mrnazari_org/" -->
 <style>
   .pop-bg {
     background: linear-gradient(#fdd081, #f9a44a);
@@ -13,7 +49,7 @@
     width: 180px;
     height: 180px;
     position: absolute;
-    top : 15%;
+    top: 15%;
     right: 50%;
     transform: translate(50%);
     /* top:10%; */
@@ -64,7 +100,7 @@
   }
   .buttons-wrapper {
     /* margin-top: 20%; */
-    top:70%;
+    top: 70%;
     right: 50%;
     transform: translate(50%);
     position: absolute;
@@ -73,22 +109,3 @@
     margin-top: 20px;
   }
 </style>
-
-<div class="pop-bg">
-  <div class="image-wrapper mx-auto">
-    <img width="180" src="/images/animation_500_kgkwosyz.gif" alt="box" />
-  </div>
-   <p class="pop-title mx-auto">ممنون از خرید شما</p>
-  <p class="pop-content mx-auto">
-    برای اطلاع از قرعه کشی ها لطفا پیج اینستاگرام شاعر را فالو کنید.
-  </p>
-
-  <div class="buttons-wrapper ">
-    <a
-      href="https://www.instagram.com/mrnazari_org/"
-      class="button secondary mx-auto d-flex align-items-center justify-content-center">فالو</a>
-    <a
-    href='sg://sheroganj'
-      class="button primary margin-top mx-auto d-flex align-items-center justify-content-center">بعدا</a>
-  </div> 
-</div>

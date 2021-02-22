@@ -14,13 +14,16 @@
   onMount(async () => {
     try {
       const res = await axiosInstance.get("/buy/");
-      console.log(res.data);
+      const href = window.location.href;
+      if (
+        href === baseFrontUrl + "/successpayment" ||
+        href === baseFrontUrl + "/failpayment"
+      )
+        return;
       if (res?.data?.is_bought) {
-        // window.location.href = `${baseFrontUrl}/success`;
         navigate("/success");
-      } else {
+      } else  {
         navigate("/amount");
-        // window.location.href = `${baseFrontUrl}/amount`;
       }
     } catch (err) {
       if (err?.response?.status === 401) {

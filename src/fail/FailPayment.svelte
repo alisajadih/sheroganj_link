@@ -1,8 +1,25 @@
 <script>
+  import { baseFrontUrl } from "../Signup/formStore";
 </script>
 
+<div class="pop-bg ">
+  <div class="image-wrapper mx-auto">
+    <img width="120" src="/images/close.png" alt="box" />
+  </div>
+  <p class="pop-title mx-auto">متاسفانه پرداخت ناموفق بود.</p>
+
+  <div class="buttons-wrapper ">
+    <a
+      href={baseFrontUrl + "/amount"}
+      class="button secondary margin-top mx-auto d-flex align-items-center justify-content-center"
+      >تلاش مجدد</a
+    >
+  </div>
+</div>
+
+<!-- href="sg://sheroganj" -->
 <style>
-   .pop-bg {
+  .pop-bg {
     background: linear-gradient(#fdd081, #f9a44a);
     /* padding-top: 12%; */
     height: 100vh;
@@ -16,11 +33,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    top : 25%;
+    top: 25%;
     right: 50%;
     transform: translate(50%);
     /* top:10%; */
-    background-color:transparent;
+    background-color: transparent;
     border-radius: 100%;
     overflow: hidden;
   }
@@ -67,7 +84,7 @@
   }
   .buttons-wrapper {
     /* margin-top: 20%; */
-    top:70%;
+    top: 70%;
     right: 50%;
     transform: translate(50%);
     position: absolute;
@@ -76,16 +93,3 @@
     margin-top: 20px;
   }
 </style>
-
-<div class="pop-bg ">
-  <div class="image-wrapper mx-auto">
-    <img width="120" src="/images/close.png" alt="box" />
-  </div>
-  <p class="pop-title mx-auto">متاسفانه پرداخت ناموفق بود.</p>
-
-  <div class="buttons-wrapper ">
-    <a
-      href="sg://sheroganj"
-      class="button secondary margin-top mx-auto d-flex align-items-center justify-content-center">بازگشت به برنامه</a>
-  </div>
-</div>
