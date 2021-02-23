@@ -51,7 +51,7 @@
   const handleChangeInput = (e) => {
     // e.preventDefault()
     inputAmountValue = e.target.value;
-    activeAmount = convertNumbers2English(inputAmountValue);
+    activeAmount = convertNumbers2English(inputAmountValue).toString();
   };
   const handleKeyPress = (e) => {
     const BIRTHNUMBER_ALLOWED_CHARS_REGEXP = /[0-9۱۲۳۴۵۶۷۸۹۰\/]+/;
@@ -62,6 +62,7 @@
   };
 
   const handleSendAmount = async () => {
+    console.log(activeAmount);
     if (Number(activeAmount) < 50000) {
       error = "حداقل مبلغ پرداختی 50,000 تومان است";
       wait(2000).then(() => {
@@ -70,7 +71,7 @@
     } else {
       loading = "درحال انتقال به درگاه بانک...";
       const res = await axiosInstance.post("/buy/", {
-        amount: convertNumbers2English(activeAmount),
+        amount: convertNumbers2English(activeAmount.toString()),
       });
       const link = res?.data?.link;
       if (link) {

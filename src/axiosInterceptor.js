@@ -23,7 +23,7 @@ export const axiosInterceptor = (axiosInstance) => {
     (response) => response,
     (error) => {
       const originalRequest = error.config;
-      if (error.response?.status === 401 && originalRequest.url === "/refresh/") {
+      if (error.response?.status === 401 && originalRequest.url === "/registry/refresh/") {
         LSService.clearToken();
         // noinspection JSIgnoredPromiseFromCall
         // Router.replace("/panel/login");
@@ -38,7 +38,7 @@ export const axiosInterceptor = (axiosInstance) => {
       ) {
         originalRequest._retry = true;
         return axiosInstance
-          .post("/refresh/", {
+          .post("/registry/refresh/", {
             refresh: LSService.getRefreshToken(),
           })
           .then((res) => {

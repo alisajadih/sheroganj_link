@@ -115,11 +115,9 @@ export const sendRefreshOtp = async (form) => {
   console.log(form, "send refresh opt");
   saving.set(true);
   try {
-    await axiosInstance.post(
-      baseurl +
-        "/api/refresh_invite/" +
-        convertNumbers2English(form.phoneNumber)
-    );
+    await axiosInstance.post("/registry/otp/refresh/", {
+      mobile_number: convertNumbers2English(form.phoneNumber),
+    });
     errors.set(null);
     saving.set(false);
   } catch (err) {
