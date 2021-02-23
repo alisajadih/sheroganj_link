@@ -7,9 +7,9 @@ export let errors = writable(null);
 export let saving = writable(false);
 export let success = writable(null);
 
-export const baseFrontUrl =
-  //  "https://app.sheroganj.ir"
-  "http://localhost:5000";
+export const baseFrontUrl = process.env.isProd
+  ? "https://app.sheroganj.ir"
+  : "http://localhost:5000";
 export const baseurl = "https://api.sheroganj.ir";
 
 export function convertNumbers2English(string) {
@@ -94,7 +94,7 @@ export const sendOTP = async (form) => {
       if (res?.data?.user?.is_bought) {
         window.location.href = baseFrontUrl + "/success";
       } else {
-        console.log('here');
+        console.log("here");
         window.location.href = baseFrontUrl + "/amount";
       }
       saving.set(false);
