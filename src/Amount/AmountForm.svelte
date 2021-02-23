@@ -56,28 +56,31 @@
   const handleKeyPress = (e) => {
     const BIRTHNUMBER_ALLOWED_CHARS_REGEXP = /[0-9۱۲۳۴۵۶۷۸۹۰\/]+/;
     console.log();
-    if (!BIRTHNUMBER_ALLOWED_CHARS_REGEXP.test(e.key) || e.target.value.length >= 8 ) {
+    if (
+      !BIRTHNUMBER_ALLOWED_CHARS_REGEXP.test(e.key) ||
+      e.target.value.length >= 8
+    ) {
       e.preventDefault();
     }
   };
 
   const handleSendAmount = async () => {
     console.log(activeAmount);
-    if (Number(activeAmount) < 50000) {
-      error = "حداقل مبلغ پرداختی 50,000 تومان است";
-      wait(2000).then(() => {
-        error = "";
-      });
-    } else {
-      loading = "درحال انتقال به درگاه بانک...";
-      const res = await axiosInstance.post("/buy/", {
-        amount: convertNumbers2English(activeAmount.toString()),
-      });
-      const link = res?.data?.link;
-      if (link) {
-        window.location.href = link;
-      }
+    // if (Number(activeAmount) < 50000) {
+    //   error = "حداقل مبلغ پرداختی 50,000 تومان است";
+    //   wait(2000).then(() => {
+    //     error = "";
+    //   });
+    // } else {
+    loading = "درحال انتقال به درگاه بانک...";
+    const res = await axiosInstance.post("/buy/", {
+      amount: convertNumbers2English(activeAmount.toString()),
+    });
+    const link = res?.data?.link;
+    if (link) {
+      window.location.href = link;
     }
+    // }
   };
 
   // $: hasError = errors && errors["otp"];
