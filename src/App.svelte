@@ -15,14 +15,16 @@
     try {
       const res = await axiosInstance.get("/buy/");
       const href = window.location.href;
+      // console.log(window.location.pathname);
       if (
         href === baseFrontUrl + "/successpayment" ||
-        href === baseFrontUrl + "/failpayment"
+        href === baseFrontUrl + "/failpayment" ||
+        href.startsWith(baseFrontUrl + "/callback")
       )
         return;
       if (res?.data?.is_bought) {
         navigate("/success");
-      } else  {
+      } else {
         navigate("/amount");
       }
     } catch (err) {
