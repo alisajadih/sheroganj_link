@@ -12,26 +12,25 @@
   import AmountForm from "./Amount/AmountForm.svelte";
 
   onMount(async () => {
+    const href = window.location.href;
+    const pathname = window.location.pathname;
+    console.log(pathname);
+    if (
+      pathname === "/successpayment" ||
+      pathname === "/failpayment" ||
+      pathname.startsWith("/callback")
+    )
+      return;
     try {
       const res = await axiosInstance.get("/buy/");
-      const href = window.location.href;
       // console.log(window.location.pathname);
-      if (
-        href === baseFrontUrl + "/successpayment" ||
-        href === baseFrontUrl + "/failpayment" ||
-        href.startsWith(baseFrontUrl + "/callback")
-      )
-        return;
       if (res?.data?.is_bought) {
         navigate("/success");
       } else {
         navigate("/amount");
       }
     } catch (err) {
-      if (
-        err?.response?.status === 401 &&
-        href !== baseFrontUrl + "/activate/new"
-      ) {
+      if (err?.response?.status === 401 && !pathname.startsWith("/activate/")) {
         navigate("/activate/new");
       }
     }
