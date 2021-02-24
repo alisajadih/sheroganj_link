@@ -28,7 +28,10 @@
         navigate("/amount");
       }
     } catch (err) {
-      if (err?.response?.status === 401) {
+      if (
+        err?.response?.status === 401 &&
+        href !== baseFrontUrl + "/activate/new"
+      ) {
         navigate("/activate/new");
       }
     }
