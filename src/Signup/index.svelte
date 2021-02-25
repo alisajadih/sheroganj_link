@@ -23,7 +23,10 @@
       if (!$errors) {
         phoneSubmitted = true;
       }
-    } catch (err) {}
+    } catch (err) {
+      console.log(err.response);
+      phoneSubmitted = true;
+    }
   };
   const onSubmitOtp = async () => {};
 </script>

@@ -59,15 +59,16 @@ export const save = async (form, uid) => {
   } catch (err) {
     console.log(err.response);
     const errorDate = err.response.data.invited_mobile_number;
-    if (errorDate[1] === "406") {
-      // redirect to success
-      window.location.href = baseFrontUrl + "/success";
-    } else {
-      errors.set({ phoneNumber: err.response.data.invited_mobile_number[0] });
-      wait(2000).then(() => {
-        errors.set(null);
-      });
-    }
+    
+    // if (errorDate[1] === "406") {
+    //   // redirect to success
+    //   window.location.href = baseFrontUrl + "/success";
+    // } else {
+    //   errors.set({ phoneNumber: err.response.data.invited_mobile_number[0] });
+    //   wait(2000).then(() => {
+    //     errors.set(null);
+    //   });
+    // }
   } finally {
     saving.set(false);
   }
@@ -94,7 +95,6 @@ export const sendOTP = async (form) => {
       if (res?.data?.user?.is_bought) {
         window.location.href = baseFrontUrl + "/success";
       } else {
-        console.log("here");
         window.location.href = baseFrontUrl + "/amount";
       }
       saving.set(false);
@@ -121,6 +121,7 @@ export const sendRefreshOtp = async (form) => {
     errors.set(null);
     saving.set(false);
   } catch (err) {
+    console.log(err.response);
     errors.set({
       otp:
         "کد تایید شما هنوز معتبر است و قبل از منقضی شدن آن انجام چنین عملیاتی وجود ندارد",

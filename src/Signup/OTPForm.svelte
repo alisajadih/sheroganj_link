@@ -3,6 +3,7 @@
   import { navigate } from "svelte-routing";
   import { sendOTP, sendRefreshOtp } from "./formStore";
   import { slide } from "svelte/transition";
+  import { axiosInstance } from "../axiosInstance";
   const dispatch = createEventDispatcher();
   export let form;
   export let errors;
@@ -13,7 +14,11 @@
     form.otp = e.target.value;
   };
   let interval;
-  onMount(() => {
+  onMount(async () => {
+    const res = await axiosInstance.get(`/otp/info/${form.phoneNumber}/`);
+    let remaining_time_of_otp = res.data.remaining_time_of_otp;
+    timer = remaining_time_of_otp;
+    console.log(timer);
     interval = setInterval(() => {
       if (!timer) clearInterval(interval);
       else timer = timer - 1;
@@ -33,13 +38,52 @@
       }, 1000);
     } catch (err) {}
   };
-  const handleSendOtp =  () => {
+  const handleSendOtp = () => {
     sendOTP(form);
     // navigate("/success", { replace: true });
   };
   $: hasError = errors && errors["otp"];
   $: inputClasses = hasError ? "input-error" : "";
 </script>
+
+<form
+  class={`form-container mx-auto ${timer === 0 && "slide-up"}`}
+  on:submit|preventDefault={() => dispatch("submit")}
+>
+  <p class="form-header">کد پیامک شده را وارد نمایید</p>
+  <div class="icon-input-container mx-auto">
+    <input
+      name="otp"
+      bind:value={form.otp}
+      on:input={handleInput}
+      class={`icon-input m-0 ${inputClasses}`}
+      type="text"
+      disabled={timer === 0}
+      placeholder="کد تأ‌یید"
+    />
+  </div>
+  {#if timer !== 0}
+    <p transition:slide class="form-header">
+      {Math.floor(timer / 60)}:{timer % 60}
+    </p>
+  {/if}
+  {#if timer === 0}
+    <button
+      type="button"
+      class="button-submit"
+      on:click={handleRefreshOtp}
+      disabled={loading}
+      >{loading ? "در حال ارسال پیامک ..." : "ارسال مجدد پیامک"}</button
+    >
+  {:else}
+    <button
+      type="button"
+      class="button-submit"
+      on:click={handleSendOtp}
+      disabled={loading}>{loading ? "در حال تاٰیید کد ..." : "ارسال"}</button
+    >
+  {/if}
+</form>
 
 <style>
   .form-container {
@@ -129,37 +173,3 @@
     height: 240px !important;
   }
 </style>
-
-<form
-  class={`form-container mx-auto ${timer === 0 && 'slide-up'}`}
-  on:submit|preventDefault={() => dispatch('submit')}>
-  <p class="form-header">کد پیامک شده را وارد نمایید</p>
-  <div class="icon-input-container mx-auto">
-    <input
-      name="otp"
-      bind:value={form.otp}
-      on:input={handleInput}
-      class={`icon-input m-0 ${inputClasses}`}
-      type="text"
-      disabled={timer === 0}
-      placeholder="کد تأ‌یید" />
-  </div>
-  {#if timer !== 0}
-    <p transition:slide class="form-header">
-      {Math.floor(timer / 60)}:{timer % 60}
-    </p>
-  {/if}
-  {#if timer === 0}
-    <button
-      type="button"
-      class="button-submit"
-      on:click={handleRefreshOtp}
-      disabled={loading}>{loading ? 'در حال ارسال پیامک ...' : 'ارسال مجدد پیامک'}</button>
-  {:else}
-    <button
-      type="button"
-      class="button-submit"
-      on:click={handleSendOtp}
-      disabled={loading}>{loading ? 'در حال تاٰیید کد ...' : 'ارسال'}</button>
-  {/if}
-</form>
