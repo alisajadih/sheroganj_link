@@ -9,15 +9,15 @@
   export let errors;
   export let loading;
 
-  let timer = 120;
+  export let timer ;
   const handleInput = (e) => {
     form.otp = e.target.value;
   };
   let interval;
   onMount(async () => {
-    const res = await axiosInstance.get(`/otp/info/${form.phoneNumber}/`);
-    let remaining_time_of_otp = res.data.remaining_time_of_otp;
-    timer = remaining_time_of_otp;
+    // const res = await axiosInstance.get(`/otp/info/${form.phoneNumber}/`);
+    // let remaining_time_of_otp = res.data.remaining_time_of_otp;
+    // timer = remaining_time_of_otp || timer;
     console.log(timer);
     interval = setInterval(() => {
       if (!timer) clearInterval(interval);
@@ -64,7 +64,9 @@
   </div>
   {#if timer !== 0}
     <p transition:slide class="form-header">
-      {Math.floor(timer / 60)}:{timer % 60}
+      {`0${Math.floor(timer / 60)}`}:{timer % 60 < 10
+        ? `0${timer % 60}`
+        : `${timer % 60}`}
     </p>
   {/if}
   {#if timer === 0}
