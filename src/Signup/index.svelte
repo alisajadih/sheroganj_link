@@ -59,10 +59,9 @@
       );
       if (!$errors) {
         phoneSubmitted = true;
-        // console.log('here in ls set item');
       }
     } catch (err) {
-      phoneSubmitted = true;
+      // phoneSubmitted = true;
     }
   };
   const onSubmitOtp = async () => {};

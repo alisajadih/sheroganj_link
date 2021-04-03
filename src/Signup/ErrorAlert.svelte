@@ -6,7 +6,7 @@
       ? errorMessage
       : (errorMessage &&
           (errorMessage["otp"] || errorMessage["phoneNumber"])) ||
-        "ارور";
+        "مجدد امتحان کنید";
 </script>
 
 <div

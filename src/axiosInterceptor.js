@@ -11,6 +11,8 @@ export const axiosInterceptor = (axiosInstance) => {
       const token = LSService.getAccessToken();
       if (token) {
         config.headers["Authorization"] = `Bearer ${token}`;
+      }else {
+        config.headers['Authorization'] = null
       }
       return config;
     },

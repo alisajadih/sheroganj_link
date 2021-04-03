@@ -59,7 +59,11 @@ export const save = async (form, uid) => {
   } catch (err) {
     console.log(err.response);
     const errorDate = err.response.data.invited_mobile_number;
-    
+    // console.log("here in ls set item");
+    errors.set({fail : true})
+    LSService.clearToken();
+    // throw new Error(err);
+
     // if (errorDate[1] === "406") {
     //   // redirect to success
     //   window.location.href = baseFrontUrl + "/success";
