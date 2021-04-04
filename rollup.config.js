@@ -4,6 +4,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 import replace from "@rollup/plugin-replace";
+import html from '@rollup/plugin-html'
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -38,7 +39,7 @@ export default {
     sourcemap: true,
     format: "iife",
     name: "app",
-    file: "public/build/bundle.js",
+    file: production ? "public/build/bundle[hash].js" :  "public/build/bundle.js",
   },
   plugins: [
     svelte({
@@ -50,6 +51,7 @@ export default {
         css.write("bundle.css");
       },
     }),
+    html(),
     // If you have external dependencies installed from
     // npm, you'll most likely need these plugins. In
     // some cases you'll need additional configuration -

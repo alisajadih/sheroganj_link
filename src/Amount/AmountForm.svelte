@@ -66,21 +66,28 @@
 
   const handleSendAmount = async () => {
     console.log(activeAmount);
-    // if (Number(activeAmount) < 50000) {
-    //   error = "حداقل مبلغ پرداختی 50,000 تومان است";
-    //   wait(2000).then(() => {
-    //     error = "";
-    //   });
-    // } else {
-    loading = "درحال انتقال به درگاه بانک...";
-    const res = await axiosInstance.post("/buy/", {
-      amount: convertNumbers2English(activeAmount.toString()),
-    });
-    const link = res?.data?.link;
-    if (link) {
-      window.location.href = link;
+    if (Number(activeAmount) < 50000) {
+      error = "حداقل مبلغ پرداختی 50,000 تومان است";
+      wait(2000).then(() => {
+        error = "";
+      });
+    } else {
+      loading = "درحال انتقال به درگاه بانک...";
+      try {
+        const res = await axiosInstance.post("/buy/", {
+          amount: convertNumbers2English(activeAmount.toString()),
+        });
+        const link = res?.data?.link;
+        if (link) {
+          window.location.href = link;
+        }
+      } catch (err) {
+        error = "مشکلی پیش آمده است";
+        wait(2000).then(() => {
+          error = "";
+        });
+      }
     }
-    // }
   };
 
   // $: hasError = errors && errors["otp"];
