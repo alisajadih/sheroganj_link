@@ -117,10 +117,17 @@ export const sendOTP = async (form) => {
 };
 export const sendRefreshOtp = async (form) => {
   console.log(form, "send refresh opt");
+  let phoneNumber = form.phoneNumber
+  if (
+    convertNumbers2English(form.phoneNumber).length === 11 &&
+    convertNumbers2English(form.phoneNumber).startsWith("0")
+  ) {
+    phoneNumber = phoneNumber.slice(1);
+  }
   saving.set(true);
   try {
     await axiosInstance.post("/registry/otp/refresh/", {
-      mobile_number: convertNumbers2English(form.phoneNumber),
+      mobile_number: convertNumbers2English(phoneNumber),
     });
     errors.set(null);
     saving.set(false);
