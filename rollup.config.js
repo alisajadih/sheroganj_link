@@ -78,13 +78,13 @@ export default {
       template: async ({ attributes, files, meta, publicPath, title }) => {
         const script = (files.js || [])
           .map(({ fileName }) => {
-            return `<script defer src='${fileName}'></script>`;
+            return `<script defer src='/${fileName}'></script>`;
           })
           .join("\n");
 
         const css = (files.css || [])
           .map(({ fileName }) => {
-            return `<link rel='stylesheet' href='${fileName}'>`;
+            return `<link rel='stylesheet' href='/${fileName}'>`;
           })
           .join("\n");
         return `<!DOCTYPE html>
