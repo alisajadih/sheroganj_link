@@ -47,6 +47,7 @@
   const onSubmitPhoneNumber = async () => {
     const tosenduid = uid === "new" ? null : uid;
     try {
+      form = { ...form, phoneNumber: form.phoneNumber.trim() };
       await save(form, tosenduid);
       // console.log(form.phoneNumber.toString().length);
       localStorage.setItem(
