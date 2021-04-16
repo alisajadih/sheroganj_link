@@ -34,24 +34,9 @@
   @media (min-width: 992px) {
     .header {
       margin-top: 80px;
-      /* position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, 50%); */
       border-radius: 30px;
     }
-    /* .header-logo {
-      margin-left: 0 !important;
-      margin-right: 180px !important;
-    }
-    .header-title {
-      margin-left: 0 !important;
-      margin-right: 110px !important;
-    }
-    .header-content {
-      margin-left: 0 !important;
-      margin-right: 75px !important;
-    } */
+   
   }
 </style>
 
@@ -66,9 +51,9 @@
 
   <div class="header-content mx-auto">
     <p>
-       شما در اپلیکیشن شعر و گنج علاوه بر خواندن سه
-      مجموعه از اشعار محمدرضا نظری «لادون پرند» میتوانید با دریافت لینک اختصاصی
-      و قرار دادن لینک فروش در فضای مجازی و ارسال به دوستان در چهل درصد سود شریک
+      شما در اپلیکیشن شعر و گنج علاوه بر خواندن دو
+      مجموعه از اشعار محمدرضا نظری «لادون پرند»، می توانید با دریافت لینک اختصاصی
+      و قرار دادن لینک فروش در فضای مجازی و ارسال به دوستان، تا چهل درصد در سود شریک
       شوید و از هر فروش مبلغ بیست هزار تومان دریافت کنید سپاس از حمایت و اعتماد
       شما
     </p>
