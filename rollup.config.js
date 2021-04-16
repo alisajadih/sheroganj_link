@@ -4,8 +4,13 @@ import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 import replace from "@rollup/plugin-replace";
-import html from '@rollup/plugin-html'
+import html from "@rollup/plugin-html";
 
+const version = require("fs").existsSync(".git")
+  ? String(
+      require("child_process").execSync("git rev-parse --short HEAD")
+    ).trim()
+  : "static"; // append short git commit to bundles
 const production = !process.env.ROLLUP_WATCH;
 
 function serve() {
@@ -39,7 +44,9 @@ export default {
     sourcemap: true,
     format: "iife",
     name: "app",
-    file: production ? "public/build/bundle[hash].js" :  "public/build/bundle.js",
+    file: production
+      ? "public/build/bundle-v" + version + ".js"
+      : "public/build/bundle.js",
   },
   plugins: [
     svelte({
@@ -48,10 +55,44 @@ export default {
       // we'll extract any component CSS out into
       // a separate file - better for performance
       css: (css) => {
-        css.write("bundle.css");
+        !production
+          ? css.write("bundle.css")
+          : css.write(`bundle-v${version}.css`);
       },
     }),
-    html(),
+    // svelte({
+    // 	compilerOptions: {
+    // 		dev: !production
+    // 	}
+    // }),
+    html({
+      template: async ({ attributes, files, meta, publicPath, title }) => {
+        const script = (files.js || [])
+          .map(({ fileName }) => {
+            return `<script defer src='${fileName}'></script>`;
+          })
+          .join("\n");
+
+        const css = (files.css || [])
+          .map(({ fileName }) => {
+            return `<link rel='stylesheet' href='${fileName}'>`;
+          })
+          .join("\n");
+        return `<!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="utf-8"/>
+          <meta name="viewport" content="width=device-width,initial-scale=1"/>
+          <title>شعر و گنج</title>
+          <link rel="icon" type="image/png" href="/images/group_25.png"/>
+          ${css}        
+          ${script}
+         </head>
+        <body></body>
+        </html>     
+`;
+      },
+    }),
     // If you have external dependencies installed from
     // npm, you'll most likely need these plugins. In
     // some cases you'll need additional configuration -

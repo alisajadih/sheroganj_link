@@ -1,0 +1,104 @@
+
+import svelte from 'rollup-plugin-svelte';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import livereload from 'rollup-plugin-livereload';
+import { terser } from 'rollup-plugin-terser';
+import postcss from 'rollup-plugin-postcss';
+import purgecss from '@fullhuman/postcss-purgecss';
+import nodePolyfills from 'rollup-plugin-node-polyfills';
+import html from '@rollup/plugin-html';
+
+const production = !process.env.ROLLUP_WATCH;
+const version = require('fs').existsSync('.git') ? String(require('child_process').execSync('git rev-parse --short HEAD')).trim() : 'static'; // append short git commit to bundles
+
+export default {
+	input: 'src/main.js',
+	output: {
+		sourcemap: !production,
+		format: 'iife',
+		name: 'app',
+		file: 'public/bundle-v' + version + '.js'
+	},
+	plugins: [
+		svelte({
+			compilerOptions: {
+				dev: !production
+			}
+		}),
+
+		postcss({ extract: true, plugins: (production ? [purgecss({ content: ["./src/**/*.svelte", "./rollup.config.js"] })] : []), minimize: production }),
+
+		resolve({
+			browser: true,
+			dedupe: ['svelte'],
+			preferBuiltins: true
+		}),
+		commonjs(),
+		nodePolyfills(),
+
+		html({
+			template: async ({ attributes, files, meta, publicPath, title }) => {
+				const script = (files.js || [])
+					.map(({ fileName }) => {
+						return `<script defer src='${fileName}'></script>`;
+					})
+					.join('\n');
+
+				const css = (files.css || [])
+					.map(({ fileName }) => {
+						return `<link rel='stylesheet' href='${fileName}'>`;
+					})
+					.join('\n');
+				return `
+        
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="utf-8"/>
+          <meta name="viewport" content="width=device-width,initial-scale=1"/>
+        
+          <title>شعر و گنج</title>
+        
+          <link rel="icon" type="image/png" href="/images/group_25.png"/>
+          <link rel="stylesheet" href="/global.css"/>
+          <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.5.2-1/css/bootstrap-rtl.min.css"
+                integrity="sha512-+1C9xBCl0azgGjU6bIsATfB4XOQ0MSFduPs388NiyzwYt4nfelS72KSPSFZT338FjP7F3mMme2re8+gUJe2HZQ=="
+                crossorigin="anonymous"/>
+          <link rel="stylesheet" href="/fonts.css"/>
+          ${css}        
+          ${script}
+         </head>
+        
+        <body></body>
+        </html>     
+   
+`;
+			}
+		}),
+		!production && serve(),
+		!production && livereload('public'),
+		production && terser()
+	],
+	watch: {
+		clearScreen: false
+	}
+};
+
+function serve() {
+	let started = false;
+
+	return {
+		writeBundle() {
+			if (!started) {
+				started = true;
+
+				require('child_process').spawn('npm', ['run', 'start', '--', '--dev'], {
+					stdio: ['ignore', 'inherit', 'inherit'],
+					shell: true
+				});
+			}
+		}
+	};
+}
