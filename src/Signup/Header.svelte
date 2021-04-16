@@ -19,7 +19,7 @@
     margin-top: 30px;
     color: #f9a44a;
     font-weight: 700;
-    font-size: 21px;
+    font-size: 19px;
   }
   .header-content {
     width: 315px;

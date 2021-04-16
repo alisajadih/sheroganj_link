@@ -27,7 +27,7 @@
     border-radius: 20px;
     background-color: white;
     position: absolute;
-    bottom: -170px;
+    bottom: -183px;
     left: 50%;
     transform: translate(-50%);
     text-align: center;
